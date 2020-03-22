@@ -10,5 +10,20 @@
 * The masked image is drawn with hough lines which is later combined with original image </br>
 
 ![The ouput images of each step](./images/plot.PNG)
-![Image from CARLA simulator](./data/00002498.png)
-![Lane detected](_out/lane.PNG)
+
+#### The following image shows the lane detected using lane_detection_canny.py.
+
+<p float="left">
+  <img src="./data/00002498.png" alt="image_"	title="image from simulator" width="300" height="200" />
+  <img src="./images/lane.PNG" alt="lane_"	title="Lane detected" width="300" height="200" /> 
+</p>
+
+### Simultaneously reading and detecting lanes
+
+The manual_control.py is a program to control the car in CARLA simulator. Refer http://carla.org/ for more details. The first image is the car with a RGB camera sensor is attached to record images. The second image is the image captured from the sensor. This image is passed to carla_lane.py function to detect lanes. The third image is the image with lane markings are saved in folder *_out*. 
+
+<p float="left">
+  <img src="./images/carla_driving.png" alt="car"	title="Car with RGB sensor" width="250" height="200" />
+  <img src="./data/test.png" alt="image"	title="Image captured from sensor" width="250" height="200" /> 
+  <img src="./images/lane_whiledriving.PNG" alt="lane"	title="Lane detected" width="250" height="200" />
+</p>

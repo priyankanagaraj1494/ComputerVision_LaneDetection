@@ -15,9 +15,9 @@
 Install anaconda (version management control) and create a virtual environment using 'conda create -name lane python=3.7' </br>
 Install packages : opencv, matplotlib, numpy, glob, math
 Download CARLA from http://carla.org/2019/04/03/release-0.9.5/
-Download or clone this folder and run lane_detection_canny.py </br>
 
 ### Running
+Download or clone this folder and run lane_detection_canny.py </br>
 The following image shows the lane detected using lane_detection_canny.py </br>
 
 <p float="left">
@@ -25,7 +25,7 @@ The following image shows the lane detected using lane_detection_canny.py </br>
   <img src="./_out/lane.PNG" alt="lane_"	title="Lane detected" width="420" height="300" /> 
 </p>
 
-### Simultaneously reading and detecting lanes
+#### Simultaneously reading and detecting lanes
 
 The manual_control.py is a program to control the car in CARLA simulator. Refer http://carla.org/ for more details. The first image is the car with a RGB camera sensor is attached to record images. The second image is the image captured from the sensor. This image is passed to carla_lane.py function to detect lanes. The third image is the image with lane markings are saved in folder *_out*. 
 

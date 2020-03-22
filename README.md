@@ -12,3 +12,5 @@
 ![The ouput images of each step](./images/plot.PNG)
 ![Image from CARLA simulator](./data/00002498.png)
 ![Lane detected](./images/lane.PNG)
+
+![Car with rgb sensor](./images/carla_driving.PNG) ![image captured from sensor](./data/test.PNG)  ![Lane detected] from captured image(./images/lane_whiledriving.PNG)

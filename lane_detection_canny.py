@@ -72,6 +72,7 @@ def show_images(images, titles=None):
 def region_of_interest(img, vertices):
     """
     Applies an image mask.
+
     Only keeps the region of the image defined by the polygon
     formed from `vertices`. The rest of the image is set to black.
     """
@@ -93,9 +94,62 @@ def region_of_interest(img, vertices):
     return masked_image
 
 
+def draw_lines(img, lines, color=[200, 0, 0], thickness=10):
+    """
+    NOTE: this is the function you might want to use as a starting point once you want to
+    average/extrapolate the line segments you detect to map out the full
+    extent of the lane (going from the result shown in raw-lines-example.mp4
+    to that shown in P1_example.mp4).
+
+    Think about things like separating line segments by their
+    slope ((y2-y1)/(x2-x1)) to decide which segments are part of the left
+    line vs. the right line.  Then, you can average the position of each of
+    the lines and extrapolate to the top and bottom of the lane.
+
+    This function draws `lines` with `color` and `thickness`.
+    Lines are drawn on the image inplace (mutates the image).
+    If you want to make the lines semi-transparent, think about combining
+    this function with the weighted_img() function below
+    """
+    x_left = []
+    y_left = []
+    x_right = []
+    y_right = []
+    imshape = image.shape
+    ysize = imshape[0]
+    ytop = int(0.6 * ysize)  # need y coordinates of the top and bottom of left and right lane
+    ybtm = int(ysize)  # to calculate x values once a line is found
+
+    for line in lines:
+        for x1, y1, x2, y2 in line:
+            slope = float(((y2 - y1) / (x2 - x1)))
+            if (slope > 0.5):  # if the line slope is greater than tan(26.52 deg), it is the left line
+                x_left.append(x1)
+                x_left.append(x2)
+                y_left.append(y1)
+                y_left.append(y2)
+            if (slope < -0.5):  # if the line slope is less than tan(153.48 deg), it is the right line
+                x_right.append(x1)
+                x_right.append(x2)
+                y_right.append(y1)
+                y_right.append(y2)
+    # only execute if there are points found that meet criteria, this eliminates borderline cases i.e. rogue frames
+    if (x_left != []) & (x_right != []) & (y_left != []) & (y_right != []):
+        left_line_coeffs = np.polyfit(x_left, y_left, 1)
+        left_xtop = int((ytop - left_line_coeffs[1]) / left_line_coeffs[0])
+        left_xbtm = int((ybtm - left_line_coeffs[1]) / left_line_coeffs[0])
+        right_line_coeffs = np.polyfit(x_right, y_right, 1)
+        right_xtop = int((ytop - right_line_coeffs[1]) / right_line_coeffs[0])
+        right_xbtm = int((ybtm - right_line_coeffs[1]) / right_line_coeffs[0])
+        cv2.line(img, (left_xtop, ytop), (left_xbtm, ybtm), color, thickness)
+        cv2.line(img, (right_xtop, ytop), (right_xbtm, ybtm), color, thickness)
+
+
 def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
     """
-    Takes canny edge image as input and draws hough lines
+    `img` should be the output of a Canny transform.
+
+    Returns an image with hough lines drawn.
     """
     lines = cv2.HoughLinesP(img, rho, theta, threshold, np.array([]), minLineLength=min_line_len,
                             maxLineGap=max_line_gap)

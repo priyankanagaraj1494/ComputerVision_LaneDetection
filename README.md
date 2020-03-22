@@ -15,7 +15,7 @@
 
 <p float="left">
   <img src="./data/00002498.png" alt="image_"	title="image from simulator" width="300" height="200" />
-  <img src="./images/lane.PNG" alt="lane_"	title="Lane detected" width="300" height="200" /> 
+  <img src="./_out/lane.PNG" alt="lane_"	title="Lane detected" width="300" height="200" /> 
 </p>
 
 ### Simultaneously reading and detecting lanes
@@ -25,5 +25,5 @@ The manual_control.py is a program to control the car in CARLA simulator. Refer 
 <p float="left">
   <img src="./images/carla_driving.png" alt="car"	title="Car with RGB sensor" width="250" height="200" />
   <img src="./data/test.png" alt="image"	title="Image captured from sensor" width="250" height="200" /> 
-  <img src="./images/lane_whiledriving.PNG" alt="lane"	title="Lane detected" width="250" height="200" />
+  <img src="./_out/lane_whiledriving.PNG" alt="lane"	title="Lane detected" width="250" height="200" />
 </p>

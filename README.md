@@ -11,7 +11,14 @@
 
 <img src="./images/plot.PNG" alt="image_"	title="The ouput images of each step" width="840" height="400" />
 
-#### The following image shows the lane detected using lane_detection_canny.py.
+### Getting started and Prerequisites
+Install anaconda (version management control) and create a virtual environment using 'conda create -name lane python=3.7' </br>
+Install packages : opencv, matplotlib, numpy, glob, math
+Download CARLA from http://carla.org/2019/04/03/release-0.9.5/
+Download or clone this folder and run lane_detection_canny.py </br>
+
+### Running
+The following image shows the lane detected using lane_detection_canny.py </br>
 
 <p float="left">
   <img src="./data/00002498.png" alt="image_"	title="image from simulator" width="420" height="300" />

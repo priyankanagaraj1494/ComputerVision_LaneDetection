@@ -12,8 +12,8 @@
 <img src="./images/plot.PNG" alt="image_"	title="The ouput images of each step" width="840" height="400" />
 
 ### Getting started and Prerequisites
-Install anaconda (version management control) and create a virtual environment using command 'conda create -name lane python=3.7' from anaconda prompt </br>
-Install packages : opencv, matplotlib, numpy, glob, math
+Install anaconda (package management tool) from https://www.anaconda.com/distribution/ and create a virtual environment using command 'conda create -name lane python=3.7' from anaconda prompt </br>
+Install packages : opencv, matplotlib, numpy, glob, math </br>
 Download CARLA from http://carla.org/2019/04/03/release-0.9.5/
 
 ### Running

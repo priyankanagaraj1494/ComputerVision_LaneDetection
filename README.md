@@ -10,8 +10,16 @@
 * The masked image is drawn with hough lines which is later combined with original image </br>
 
 ![The ouput images of each step](./images/plot.PNG)
-![Image from CARLA simulator](./data/00002498.png)
-![Lane detected](./images/lane.PNG)
 
-![Car with rgb sensor](./images/carla_driving.png)   ![image captured from sensor](./data/test.png) 
-![Lane detected from captured image](./images/lane_whiledriving.PNG)
+<p float="left">
+  <img src="./data/00002498.png" alt="image_"	title="image from simulator" width="300" height="200" />
+  <img src="./images/lane.PNG" alt="lane_"	title="Lane detected" width="300" height="200" /> 
+</p>
+
+
+
+<p float="left">
+  <img src="./images/carla_driving.png" alt="car"	title="Car with RGB sensor" width="300" height="200" />
+  <img src="./data/test.png" alt="image"	title="Image captured from sensor" width="300" height="200" /> 
+  <img src="./images/lane_whiledriving.PNG" alt="lane"	title="Lane detected" width="300" height="200" />
+</p>

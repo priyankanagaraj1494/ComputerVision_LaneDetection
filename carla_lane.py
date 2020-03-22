@@ -6,12 +6,12 @@ import matplotlib.pyplot as plt
 
 
 cv_show = False
-show_plot = True
+show_plot = False
 view_points = False
 img = []
 
 def preprocess(image):
-    image = cv2.imread(image) #convert image to numpy array of shape (h,w,c) -->here c is rgb values
+    #image = cv2.imread(image) #convert image to numpy array of shape (h,w,c) -->here c is rgb values
     scaled = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) #convert rgb image to gray scale (h,w) (rgb 24 bits to 8 bits)
     #scaled = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     return scaled
@@ -94,7 +94,7 @@ def region_of_interest(img, vertices):
     return masked_image
 
 
-def draw_lines(img, lines, color=[200, 0, 0], thickness=10):
+def draw_lines(image, lines, color=[200, 0, 0], thickness=10):
     """
     NOTE: this is the function you might want to use as a starting point once you want to
     average/extrapolate the line segments you detect to map out the full
@@ -141,11 +141,11 @@ def draw_lines(img, lines, color=[200, 0, 0], thickness=10):
         right_line_coeffs = np.polyfit(x_right, y_right, 1)
         right_xtop = int((ytop - right_line_coeffs[1]) / right_line_coeffs[0])
         right_xbtm = int((ybtm - right_line_coeffs[1]) / right_line_coeffs[0])
-        cv2.line(img, (left_xtop, ytop), (left_xbtm, ybtm), color, thickness)
-        cv2.line(img, (right_xtop, ytop), (right_xbtm, ybtm), color, thickness)
+        cv2.line(image, (left_xtop, ytop), (left_xbtm, ybtm), color, thickness)
+        cv2.line(image, (right_xtop, ytop), (right_xbtm, ybtm), color, thickness)
 
 
-def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
+def hough_lines( img, rho, theta, threshold, min_line_len, max_line_gap):
     """
     `img` should be the output of a Canny transform.
 
@@ -158,20 +158,18 @@ def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
     return line_img
 
 
-if __name__ == '__main__':
-    images = glob.glob('./data/*.png') # return list of all the images in folder data
-    #to find lanes for all images
-    #for i in images:
-        #image = cv2.imread(images[2])
-    image = cv2.imread(images[0])
-    img.append(image)
-    gray_image = preprocess(images[0]) # to read only first image
-    img.append(gray_image)
+#if __name__ == '__main__':
+def detect_lane(data, frame_number):
+    image = data
+    #image = cv2.imread(image)
+    gray_image = preprocess(image)
     gausian_blur = gaussian_blur_func(gray_image)
-    img.append(gausian_blur)
     edge_canny = cv2.Canny(gausian_blur, 10, 200)
+    img.append(image)
+    img.append(gray_image)
+    img.append(gausian_blur)
     img.append(edge_canny)
-    #edge_canny = auto_canny(gausian_blur)
+
     imshape = image.shape
     xsize = imshape[1]
     ysize = imshape[0]
@@ -187,17 +185,17 @@ if __name__ == '__main__':
         plt.scatter(xsize, ysize)
         plt.show()
 
-    masked_image = region_of_interest(edge_canny,vertices)
-    img.append(masked_image)
-    line_image = hough_lines(masked_image, 1, np.pi/180, 20, 40, 25)
-    img.append(line_image)
+    #masked_image = region_of_interest(edge_canny,vertices)
+    #img.append(masked_image)
+    line_image = hough_lines(edge_canny, 1, np.pi/180, 20, 40, 25)
     lane_image = cv2.addWeighted(image, 0.8,line_image, 1., 0.)
+    img.append(line_image)
     img.append(lane_image)
 
     #to see final image with lanes
-    cv2.imshow('lane',lane_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2.imwrite('_out/%08d.png' % frame_number, lane_image)
+
+
 
     if cv_show:
         for im in img:

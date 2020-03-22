@@ -192,10 +192,8 @@ def detect_lane(data, frame_number):
     img.append(line_image)
     img.append(lane_image)
 
-    #to see final image with lanes
+    #to save imagse with lanes
     cv2.imwrite('_out/%08d.png' % frame_number, lane_image)
-
-
 
     if cv_show:
         for im in img:

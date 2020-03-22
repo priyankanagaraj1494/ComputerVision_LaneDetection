@@ -11,4 +11,4 @@
 
 ![The ouput images of each step](./images/plot.PNG)
 ![Image from CARLA simulator](./data/00002498.png)
-![Lane detected](./images/lane.PNG)
+![Lane detected](_out/lane.PNG)

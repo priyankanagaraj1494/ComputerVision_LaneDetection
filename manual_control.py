@@ -78,7 +78,7 @@ import math
 import random
 import re
 import weakref
-from examples.carla_lane import *
+from carla_lane import *
 
 try:
     import pygame
